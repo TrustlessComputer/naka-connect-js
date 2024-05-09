@@ -1,6 +1,6 @@
 {
-  "name": "naka-connect",
-  "version": "0.0.2",
+  "name": "naka-connect-js",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "files": [
     "dist"
