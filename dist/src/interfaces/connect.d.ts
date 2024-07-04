@@ -20,7 +20,7 @@ interface IRequestSignMessageResp extends IRequestAccountResp {
     signature: string;
 }
 type Target = "_blank" | "_parent" | "_self" | "_top" | 'popup';
-type IChainType = "NAKA" | "RUNE" | "EAI";
+type IChainType = "NAKA" | "RUNE" | "EAI" | string;
 interface IRequestPayload {
     target: Target;
     popupSize?: string;

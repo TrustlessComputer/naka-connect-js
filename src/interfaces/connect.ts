@@ -28,7 +28,7 @@ interface IRequestSignMessageResp extends IRequestAccountResp {
 }
 
 type Target = "_blank" | "_parent" | "_self" | "_top" | 'popup';
-type IChainType = "NAKA" | "RUNE" | "EAI";
+type IChainType = "NAKA" | "RUNE" | "EAI" | string;
 
 interface IRequestPayload {
   target: Target
