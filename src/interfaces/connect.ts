@@ -55,7 +55,12 @@ interface IRequestSignPayload extends IRequestPayload {
   value?: string;
   nonce?: number | string;
   isExecuteTransaction?: boolean;
-  chainType: IChainType
+  chainType: IChainType,
+  accountAbstraction?: {
+    paymasterAddress: string;
+    tokenAddress: string;
+    tokenFeeAddress: string;
+  };
 }
 
 interface IRequestSignResp extends IRequestConnectResp {

@@ -141,6 +141,10 @@ console.log('Sign transaction response: ', response);
 - `value`: `optional` value NativeToken sending transaction. // 1e18 = 1 BVM
 
 - `chainType`: NAKA | RUNE | EAI | string. // or chainID
+- `accountAbstraction`: `Object`
+    - `paymasterAddress`: string;
+    - `tokenAddress`: string;
+    - `tokenFeeAddress`: string;
 
 ### 5. Response Payload
 - `hash`: Transaction hash.

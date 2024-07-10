@@ -44,6 +44,11 @@ interface IRequestSignPayload extends IRequestPayload {
     nonce?: number | string;
     isExecuteTransaction?: boolean;
     chainType: IChainType;
+    accountAbstraction?: {
+        paymasterAddress: string;
+        tokenAddress: string;
+        tokenFeeAddress: string;
+    };
 }
 interface IRequestSignResp extends IRequestConnectResp {
     hash: string;
