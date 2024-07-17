@@ -61,6 +61,7 @@ interface IRequestSignPayload extends IRequestPayload {
     tokenAddress: string;
     tokenFeeAddress: string;
   };
+  rawTx?: any;
 }
 
 interface IRequestSignResp extends IRequestConnectResp {
