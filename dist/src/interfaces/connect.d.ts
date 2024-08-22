@@ -1,7 +1,8 @@
 declare enum RequestMethod {
     account = "account",
     sign = "sign-transaction",
-    signMessage = "sign-message"
+    signMessage = "sign-message",
+    requestKey = "request-key"
 }
 interface IRequestConnectResp {
     method: RequestMethod;
@@ -18,6 +19,9 @@ interface IRequestAccountResp extends IRequestConnectResp {
 }
 interface IRequestSignMessageResp extends IRequestAccountResp {
     signature: string;
+}
+interface IRequestKeyResp extends IRequestConnectResp {
+    cipherText: string;
 }
 type Target = "_blank" | "_parent" | "_self" | "_top" | 'popup';
 type IChainType = "NAKA" | "RUNE" | "EAI" | string;
@@ -57,7 +61,7 @@ interface IRequestSignResp extends IRequestConnectResp {
     to?: string;
     from?: string;
 }
-export { RequestMethod, IRequestConnectResp, IRequestAccountResp, IRequestSignMessageResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, };
+export { RequestMethod, IRequestConnectResp, IRequestAccountResp, IRequestSignMessageResp, IRequestKeyResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, };
 interface IResultConnectBase {
     method: RequestMethod;
     host: string;

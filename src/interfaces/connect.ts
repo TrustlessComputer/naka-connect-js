@@ -2,6 +2,7 @@ enum RequestMethod {
   account = 'account',
   sign = 'sign-transaction',
   signMessage = "sign-message",
+  requestKey = "request-key",
 }
 
 // Base connect resp
@@ -25,6 +26,10 @@ interface IRequestAccountResp extends IRequestConnectResp {
 
 interface IRequestSignMessageResp extends IRequestAccountResp {
   signature: string;
+}
+
+interface IRequestKeyResp extends IRequestConnectResp {
+  cipherText: string;
 }
 
 type Target = "_blank" | "_parent" | "_self" | "_top" | 'popup';
@@ -76,6 +81,7 @@ export {
   IRequestConnectResp,
   IRequestAccountResp,
   IRequestSignMessageResp,
+  IRequestKeyResp,
   IRequestSignPayload,
   IRequestSignResp,
   IRequestPayload,

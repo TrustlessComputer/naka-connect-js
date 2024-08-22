@@ -51,7 +51,7 @@ class DappConnect {
                         ...payload
                     }),
                 });
-                await (0, utils_1.sleep)(0.2);
+                await (0, utils_1.sleep)(2);
                 const account = await this.request(requestID, connect_1.RequestMethod.account);
                 return account;
             }
@@ -73,7 +73,7 @@ class DappConnect {
                         host: this.getHost(),
                     }),
                 });
-                await (0, utils_1.sleep)(0.2);
+                await (0, utils_1.sleep)(2);
                 const sign = await this.request(requestID, connect_1.RequestMethod.sign);
                 return sign;
             }
@@ -94,8 +94,29 @@ class DappConnect {
                         ...payload,
                     }),
                 });
-                await (0, utils_1.sleep)(0.2);
+                await (0, utils_1.sleep)(2);
                 const resp = await this.request(requestID, connect_1.RequestMethod.signMessage);
+                return resp;
+            }
+            catch (error) {
+                throw error;
+            }
+        };
+        this.requestKey = async (payload) => {
+            try {
+                const requestID = this.generateRequestId(payload);
+                // post request
+                await this.axios.post('/data', {
+                    id: requestID,
+                    data: JSON.stringify({
+                        method: connect_1.RequestMethod.requestKey,
+                        id: requestID,
+                        host: this.getHost(),
+                        ...payload,
+                    }),
+                });
+                await (0, utils_1.sleep)(2);
+                const resp = await this.request(requestID, connect_1.RequestMethod.requestKey);
                 return resp;
             }
             catch (error) {

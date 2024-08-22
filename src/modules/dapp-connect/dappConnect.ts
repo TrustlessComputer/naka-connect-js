@@ -4,7 +4,7 @@ import {
   IRequestAccountResp,
   IRequestSignPayload,
   IRequestSignResp,
-  IRequestPayload, IRequestSignMessagePayload, IRequestSignMessageResp,
+  IRequestPayload, IRequestSignMessagePayload, IRequestSignMessageResp, IRequestKeyResp,
 } from '../../interfaces/connect';
 import Configs from '../../constants/configs';
 import { sleep, generateUniqueID } from '../../utils';
@@ -34,8 +34,6 @@ class DappConnect implements IDappConnect {
   getHost = (): string => {
     return window.location.host;
   }
-
-
 
   getResultAccount = async (requestID: string): Promise<IRequestAccountResp> => {
     try {
@@ -71,7 +69,7 @@ class DappConnect implements IDappConnect {
           ...payload
         }),
       });
-      await sleep(0.2);
+      await sleep(2);
       const account = await this.request(requestID, RequestMethod.account);
       return account;
     } catch (error) {
@@ -94,7 +92,7 @@ class DappConnect implements IDappConnect {
           host: this.getHost(),
         }),
       });
-      await sleep(0.2);
+      await sleep(2);
       const sign = await this.request(requestID, RequestMethod.sign);
       return sign;
     } catch (error) {
@@ -116,13 +114,34 @@ class DappConnect implements IDappConnect {
           ...payload,
         }),
       });
-      await sleep(0.2);
+      await sleep(2);
       const resp = await this.request(requestID, RequestMethod.signMessage);
       return resp;
     } catch (error) {
       throw error;
     }
   };
+
+  requestKey = async (payload: IRequestPayload): Promise<IRequestKeyResp> => {
+    try {
+      const requestID = this.generateRequestId(payload);
+      // post request
+      await this.axios.post('/data', {
+        id: requestID,
+        data: JSON.stringify({
+          method: RequestMethod.requestKey,
+          id: requestID,
+          host: this.getHost(),
+          ...payload,
+        }),
+      });
+      await sleep(2);
+      const resp = await this.request(requestID, RequestMethod.requestKey);
+      return resp;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   cancelRequest = () => {
     this.currentRequestID = undefined;
