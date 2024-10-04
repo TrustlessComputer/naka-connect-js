@@ -3,6 +3,7 @@ enum RequestMethod {
   sign = 'sign-transaction',
   signMessage = "sign-message",
   requestKey = "request-key",
+  sign_v4 = 'sign-transaction-v4'
 }
 
 // Base connect resp
@@ -26,6 +27,11 @@ interface IRequestAccountResp extends IRequestConnectResp {
 
 interface IRequestSignMessageResp extends IRequestAccountResp {
   signature: string;
+}
+
+interface IRequestSignV4Resp extends IRequestConnectResp {
+  signature: string;
+  account: string;
 }
 
 interface IRequestKeyResp extends IRequestConnectResp {
@@ -69,6 +75,13 @@ interface IRequestSignPayload extends IRequestPayload {
   rawTx?: any;
 }
 
+// Request sign
+interface IRequestSignV4Payload extends IRequestPayload {
+  functionName: string; // Approve
+  from: string;
+  data: any
+}
+
 interface IRequestSignResp extends IRequestConnectResp {
   hash: string;
   nonce?: number;
@@ -86,6 +99,8 @@ export {
   IRequestSignResp,
   IRequestPayload,
   IRequestSignMessagePayload,
+  IRequestSignV4Resp,
+  IRequestSignV4Payload,
 };
 
 // Result resp
@@ -95,6 +110,6 @@ interface IResultConnectBase {
   id: string;
 }
 
-type IResultConnectResp = IResultConnectBase & IRequestSignPayload & IRequestSignMessagePayload;
+type IResultConnectResp = IResultConnectBase & IRequestSignPayload & IRequestSignMessagePayload & IRequestSignV4Payload;
 
 export { IResultConnectResp };

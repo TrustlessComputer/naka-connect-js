@@ -1,4 +1,4 @@
-import { IRequestAccountResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, IRequestSignMessageResp, IRequestKeyResp } from '../../interfaces/connect';
+import { IRequestAccountResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, IRequestSignMessageResp, IRequestKeyResp, IRequestSignV4Payload, IRequestSignV4Resp } from '../../interfaces/connect';
 import { IDappConnect } from './types';
 declare class DappConnect implements IDappConnect {
     private axios;
@@ -13,6 +13,7 @@ declare class DappConnect implements IDappConnect {
     requestSign: ({ isExecuteTransaction, ...rest }: IRequestSignPayload) => Promise<IRequestSignResp>;
     requestSignMessage: (payload: IRequestSignMessagePayload) => Promise<IRequestSignMessageResp>;
     requestKey: (payload: IRequestPayload) => Promise<IRequestKeyResp>;
+    requestSignV4: (payload: IRequestSignV4Payload) => Promise<IRequestSignV4Resp>;
     cancelRequest: () => void;
     getCurrentURL: () => string;
     private generateRequestId;

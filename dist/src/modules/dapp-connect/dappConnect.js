@@ -123,6 +123,27 @@ class DappConnect {
                 throw error;
             }
         };
+        this.requestSignV4 = async (payload) => {
+            try {
+                const requestID = this.generateRequestId(payload);
+                // post request
+                await this.axios.post('/data', {
+                    id: requestID,
+                    data: JSON.stringify({
+                        method: connect_1.RequestMethod.sign_v4,
+                        id: requestID,
+                        host: this.getHost(),
+                        ...payload,
+                    }),
+                });
+                await (0, utils_1.sleep)(2);
+                const resp = await this.request(requestID, connect_1.RequestMethod.sign_v4);
+                return resp;
+            }
+            catch (error) {
+                throw error;
+            }
+        };
         this.cancelRequest = () => {
             this.currentRequestID = undefined;
             this.currentURL = undefined;

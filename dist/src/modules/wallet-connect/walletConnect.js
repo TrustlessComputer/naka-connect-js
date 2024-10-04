@@ -28,6 +28,9 @@ class WalletConnect {
         this.postResultSignMessage = async (result) => {
             return await this.postResult(result);
         };
+        this.postResultSignV4 = async (result) => {
+            return await this.postResult(result);
+        };
         this.listen = async (requestID) => {
             let nakaConnectRes;
             let counter = 0;

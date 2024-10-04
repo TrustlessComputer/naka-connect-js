@@ -7,6 +7,7 @@ var RequestMethod;
     RequestMethod["sign"] = "sign-transaction";
     RequestMethod["signMessage"] = "sign-message";
     RequestMethod["requestKey"] = "request-key";
+    RequestMethod["sign_v4"] = "sign-transaction-v4";
 })(RequestMethod || (RequestMethod = {}));
 exports.RequestMethod = RequestMethod;
 //# sourceMappingURL=connect.js.map

@@ -1,9 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
 import Configs from '../../constants/configs';
 import {
-  IRequestAccountResp, IRequestKeyResp, IRequestSignMessageResp,
+  IRequestAccountResp,
+  IRequestKeyResp,
+  IRequestSignMessageResp,
   IRequestSignResp,
   IResultConnectResp,
+  IRequestSignV4Resp
 } from '../../interfaces/connect';
 import { sleep } from '../../utils';
 import { IWalletConnect } from './types';
@@ -43,6 +46,10 @@ class WalletConnect implements IWalletConnect {
   }
 
   postResultSignMessage = async (result: IRequestSignMessageResp) => {
+    return await this.postResult(result);
+  };
+
+  postResultSignV4 = async (result: IRequestSignV4Resp) => {
     return await this.postResult(result);
   };
 

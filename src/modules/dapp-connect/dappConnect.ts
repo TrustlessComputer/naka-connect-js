@@ -4,7 +4,12 @@ import {
   IRequestAccountResp,
   IRequestSignPayload,
   IRequestSignResp,
-  IRequestPayload, IRequestSignMessagePayload, IRequestSignMessageResp, IRequestKeyResp,
+  IRequestPayload,
+  IRequestSignMessagePayload,
+  IRequestSignMessageResp,
+  IRequestKeyResp,
+  IRequestSignV4Payload,
+  IRequestSignV4Resp,
 } from '../../interfaces/connect';
 import Configs from '../../constants/configs';
 import { sleep, generateUniqueID } from '../../utils';
@@ -142,6 +147,29 @@ class DappConnect implements IDappConnect {
       throw error;
     }
   }
+
+
+  requestSignV4 = async (payload: IRequestSignV4Payload): Promise<IRequestSignV4Resp> => {
+    try {
+      const requestID = this.generateRequestId(payload);
+      // post request
+      await this.axios.post('/data', {
+        id: requestID,
+        data: JSON.stringify({
+          method: RequestMethod.sign_v4,
+          id: requestID,
+          host: this.getHost(),
+          ...payload,
+        }),
+      });
+      await sleep(2);
+      const resp = await this.request(requestID, RequestMethod.sign_v4);
+      return resp;
+    } catch (error) {
+      throw error;
+    }
+  }
+
 
   cancelRequest = () => {
     this.currentRequestID = undefined;

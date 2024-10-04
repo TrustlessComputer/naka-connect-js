@@ -2,7 +2,8 @@ declare enum RequestMethod {
     account = "account",
     sign = "sign-transaction",
     signMessage = "sign-message",
-    requestKey = "request-key"
+    requestKey = "request-key",
+    sign_v4 = "sign-transaction-v4"
 }
 interface IRequestConnectResp {
     method: RequestMethod;
@@ -19,6 +20,10 @@ interface IRequestAccountResp extends IRequestConnectResp {
 }
 interface IRequestSignMessageResp extends IRequestAccountResp {
     signature: string;
+}
+interface IRequestSignV4Resp extends IRequestConnectResp {
+    signature: string;
+    account: string;
 }
 interface IRequestKeyResp extends IRequestConnectResp {
     cipherText: string;
@@ -55,17 +60,22 @@ interface IRequestSignPayload extends IRequestPayload {
     };
     rawTx?: any;
 }
+interface IRequestSignV4Payload extends IRequestPayload {
+    functionName: string;
+    from: string;
+    data: any;
+}
 interface IRequestSignResp extends IRequestConnectResp {
     hash: string;
     nonce?: number;
     to?: string;
     from?: string;
 }
-export { RequestMethod, IRequestConnectResp, IRequestAccountResp, IRequestSignMessageResp, IRequestKeyResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, };
+export { RequestMethod, IRequestConnectResp, IRequestAccountResp, IRequestSignMessageResp, IRequestKeyResp, IRequestSignPayload, IRequestSignResp, IRequestPayload, IRequestSignMessagePayload, IRequestSignV4Resp, IRequestSignV4Payload, };
 interface IResultConnectBase {
     method: RequestMethod;
     host: string;
     id: string;
 }
-type IResultConnectResp = IResultConnectBase & IRequestSignPayload & IRequestSignMessagePayload;
+type IResultConnectResp = IResultConnectBase & IRequestSignPayload & IRequestSignMessagePayload & IRequestSignV4Payload;
 export { IResultConnectResp };
